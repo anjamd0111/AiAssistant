@@ -1,0 +1,13 @@
+module.exports = {
+  id: 'calculator', name: '🧮 Calculator', description: 'Math calculations',
+  keywords: { hi: ['गणना','जोड़','घटाव'], bn: ['গণনা','যোগ','বিয়োগ'], en: ['calculate','math','+','-','*','/'] },
+  async execute(msg, lang) {
+    const expr = msg.replace(/[^0-9+\-*/.() ]/g, '').trim();
+    try {
+      const result = eval(expr);
+      return { reply: (lang==='hi'?'🧮 परिणाम':'🧮 Result')+`: ${expr} = ${result}`, data:{result} };
+    } catch {
+      return { reply: lang==='hi'?'गणना नहीं कर सका!':lang==='bn'?'গণনা করতে পারলাম না!':'Cannot calculate!' };
+    }
+  }
+};
